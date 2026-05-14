@@ -25,9 +25,9 @@ I assume I'll use `sinatra` to keep the website component minimal.
 
 ```
 /                              /john.doe@gmail.com/
-.------------------------.     .----------------------------------.
-| [:] jane.doe@gmail.com |     | [:] 1.2MB  Today at 11:43AM      |
-| [:] john.doe@gmail.com |  -> | [:] 300kB  May 3, 2026 at 2:13PM |
-|                        |     | [:] 2.0MB  May 1, 2026 at 3:55P  |
-'------------------------'     '----------------------------------'
+•-----------------------•     •--------------------------------•
+| 👩 jane.doe@gmail.com |     | 🖼 1.2MB  Today at 11:43AM      |
+| 👨 john.doe@gmail.com |  -> | 🖼 300kB  May 3, 2026 at 2:13PM |
+| 👩 jill.doe@gmail.com |     | 🖼 2.0MB  May 1, 2026 at 3:55P  |
+•-----------------------•     •--------------------------------•
 ```
