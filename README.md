@@ -1,6 +1,7 @@
 # Scandalous: scan server
 
-I have an old HP Color Scanner/Printer from 2010 that requires an open relay to e-mail out scans. For a while, 
+I have an old HP Color Scanner/Printer from 2010 that requires an open relay to e-mail out scans,
+any no ISP (that I'm aware of) will provide an open relay these days. For a while, 
 I had Postfix (on a 512MB V1 Raspberry Pi) relaying to a Google account using an application specific password, 
 which was unreliable and is now shut down by Google. The OS running on the Pi was too old to do OAuth,
 and upgrading everything broke interoperability from the scanner.
