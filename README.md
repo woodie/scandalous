@@ -13,7 +13,7 @@ Everything will be on my home network so there is no concern about having people
 
 Transactions should work something like this:
 1. Scanner sends email with attached PDF file to the Pi.
-2. SMTP MTA removes attachment, saves to recipient folder with a timestamp filename.
+2. SMTP MTA removes attachment, saves to a `recipient-email` folder with a timestamp filename.
 3. Website serves a listing of the recent files with thumbnail, file size and date.
 4. Older files are deleted when new files are received.
 
