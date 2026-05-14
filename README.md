@@ -20,8 +20,8 @@ Transactions should work something like this:
 5. Older files are deleted when new files are received.
 
 I have newer models I could use, but the V1 Pi should be fine.
-I'll probably give it more storage, currently has only 80MB.
-The `mail_sandbox` gem shoulddto what I need for the MTA
+I'll probably give it more storage, currently has only 80MB free.
+The `mail_sandbox` gem should do what I need for the MTA
 and `pdftoimage` gem should work for thumbnails (which uses `mini_magick`). 
 I assume I'll use `sinatra` to keep the website component minimal.
 
