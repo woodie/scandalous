@@ -19,10 +19,10 @@ Transactions should work something like this:
 4. Website serves a listing of the recent files with thumbnail, file size and date.
 5. Older files are deleted when new files are received.
 
-I have newer models I could use, but the V1 Pi should be fine, 
-but I'll probably give it more storage, currently has only 80MB.
-The `mail_sandbox` gem should to what I need for the MTA
-and `pdftoimage` gem for thumbnails (which uses `mini_magick`). 
+I have newer models I could use, but the V1 Pi should be fine.
+I'll probably give it more storage, currently has only 80MB.
+The `mail_sandbox` gem shoulddto what I need for the MTA
+and `pdftoimage` gem should work for thumbnails (which uses `mini_magick`). 
 I assume I'll use `sinatra` to keep the website component minimal.
 
 ```
