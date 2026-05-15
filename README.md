@@ -1,16 +1,16 @@
 # Scandalous: scan server
 
 I have an old HP Color Scanner/Printer from 2010 that requires an open relay to e-mail out scans,
-any no ISP (that I'm aware of) will provide an open relay these days. For a while, 
+and no ISP (that I'm aware of) will provide an open relay these days. For a while, 
 I had Postfix (on a 512MB V1 Raspberry Pi) relaying to a Google account using an application specific password, 
 which was unreliable and is now shut down by Google. The OS running on the Pi was too old to do OAuth,
-and upgrading everything broke interoperability from the scanner.
+and upgrading everything broke interoperability with the scanner.
 
 <img width="193" height="226" alt="printer" src="https://github.com/user-attachments/assets/a1d7f795-6e4b-43ca-91a9-1d915b28fedc" />
 <img width="364" height="200" alt="Raspberry-Pi-1-Model-B" src="https://github.com/user-attachments/assets/b12c3dd3-4ad0-49c8-9008-a1daa97bb59c" />
 
 Now I'd like to run a very simple SMTP MTA on that same Pi that writes email attachments and serves them up.
-Everything will be on my home network so there is no concern about having people access the scans.
+Everything will be on my home network so there is no concern about having others access the scans.
 
 Transactions should work something like this:
 1. Scanner sends email with attached PDF file to the Pi.
