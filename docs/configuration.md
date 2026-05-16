@@ -2,7 +2,7 @@
 
 ### Install Ruby
 
-First, install ruby with both **apt install** and **rbenv** on the Pi.
+Install ruby with both **apt install** and **rbenv** on the Pi.
 ```
 sudo apt install autoconf bison build-essential curl git \
   libffi-dev libgdbm-dev libncurses5-dev libreadline-dev libssl-dev \
