@@ -21,9 +21,10 @@ Transactions should work something like this:
 
 I have newer models I could use, but the V1 Pi should be fine.
 I'll probably give it more storage, currently has only 80MB free.
-The `mail_sandbox` gem should do what I need for the MTA
-and `pdftoimage` gem should work for thumbnails (which uses `mini_magick`). 
-I assume I'll use `sinatra` to keep the website component minimal.
+I assume I'll use `sinatra` to keep the website component minimal. 
+The `pdftoimage` gem (which uses `mini_magick`) should work for thumbnails.
+The `mail` gem (which uses `mini_mime`) should do what I need for the MTA,
+It can handle incoming emails and save attachments.
 
 ```
 /                              /john.doe@gmail.com/
