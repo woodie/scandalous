@@ -35,4 +35,12 @@ It can handle incoming emails and save attachments.
 •-----------------------•     •--------------------------------•
 ```
 
+### Status
 
+I have a basic web listing (without the recipient folders or thumbnails). 
+
+<img width="517" height="225" alt="listing" src="https://github.com/user-attachments/assets/88ad8da2-6d87-4421-a2a0-8b61756a9c82" />
+
+```
+ruby web.rb -p 8080 -o 0.0.0.0
+```
