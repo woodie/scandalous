@@ -1,0 +1,12 @@
+[Unit]
+Description=Scandalous Web
+After=network.target
+
+[Service]
+WorkingDirectory=/home/someuser/workspace/scandalous
+ExecStart=/usr/bin/ruby web.rb -p 8080 -o 0.0.0.0
+Restart=always
+User=someuser
+
+[Install]
+WantedBy=multi-user.target

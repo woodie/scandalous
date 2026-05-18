@@ -22,7 +22,7 @@ ruby -v
 
 Specific gem packages will later be configured in the Gemfile.
 ```
-gem install mail pdftoimage sinatra
+gem install mail pdftoimage actionview rackup puma sinatra
 ```
 
 ### Open and map ports
@@ -30,7 +30,7 @@ gem install mail pdftoimage sinatra
 The webserver and mail transfer agent need to run as an unprivileged user.
 ```
 sudo apt install iptables-persistent
- 
+
 # Redirect port 80 to 8080
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
 
@@ -41,8 +41,19 @@ sudo iptables -t nat -A PREROUTING -p tcp --dport 25 -j REDIRECT --to-ports 2525
 sudo netfilter-persistent save
 ```
 
-### Run the server
+### Run development server
 ```
 ruby web.rb -p 8080 -o 0.0.0.0
 ```
 
+### Enable and run the web service
+
+Install the service
+```
+sudo cp system/scandalous-web.service /etc/systemd/system/
+# Remember to edit the username
+sudo chmod a+rwx /etc/systemd/system/scandalous-web.service
+
+sudo systemctl enable scandalous-web
+sudo systemctl start scandalous-web
+```
