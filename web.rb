@@ -21,9 +21,9 @@ def full_listing
   files = []
   Dir.entries(DIRECTORY_TO_SERVE).reject { |f| File.directory?(f) }.each do |name|
     file = File.join(DIRECTORY_TO_SERVE, name)
-    files << {name: name, date: File.mtime(file), size: as_size(File.size file)}
+    files << {name: name, date: File.mtime(file).rfc2822, size: as_size(File.size file)}
   end
-  files
+  files.sort_by { |h| h[:name] }.reverse
 end
 
 # Route to list all files in the directory
