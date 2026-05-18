@@ -29,6 +29,8 @@ gem install mail pdftoimage sinatra
 
 The webserver and mail transfer agent need to run as an unprivileged user.
 ```
+sudo apt install iptables-persistent
+ 
 # Redirect port 80 to 8080
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
 
