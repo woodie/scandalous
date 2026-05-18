@@ -41,4 +41,8 @@ sudo iptables -t nat -A PREROUTING -p tcp --dport 25 -j REDIRECT --to-ports 2525
 sudo netfilter-persistent save
 ```
 
+### Run the server
+```
+ruby web.rb -p 8080 -o 0.0.0.0
+```
 

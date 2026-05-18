@@ -14,3 +14,6 @@ end
 group :test do
   gem "rspec"
 end
+
+gem "rackup", "~> 2.3"
+gem "puma", "~> 8.0"

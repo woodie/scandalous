@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Server</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Available Files</h2>
+  <% if @files.empty? %>
+    <p>No files found in the directory.</p>
+  <% else %>
+    <ul>
+      <% @files.each do |file| %>
+        <li>
+          <a href="/download/<%= file[:name] %>">📄 <%= file[:size] %></a>
+          <%= file[:date] %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</body>
+</html>

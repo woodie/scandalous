@@ -34,3 +34,5 @@ It can handle incoming emails and save attachments.
 | 👨 john.doe@gmail.com |  -> | 🖼 2.0MB  May 1, 2026 at 3:55P  |
 •-----------------------•     •--------------------------------•
 ```
+
+
