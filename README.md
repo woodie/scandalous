@@ -6,9 +6,9 @@ I had Postfix (on a 512MB V1 Raspberry Pi) relaying to a Google account using an
 which was unreliable and is now shut down by Google. The OS running on the Pi was too old to do OAuth,
 and upgrading everything broke interoperability with the scanner.
 
-<img width="193" height="226" alt="printer" src="https://github.com/user-attachments/assets/a1d7f795-6e4b-43ca-91a9-1d915b28fedc" />  
-<img width="161" height="117" alt="piv1" src="https://github.com/user-attachments/assets/d4d1104a-7512-4310-a699-df8a36704b9b" />  
-<img width="292" height="181" alt="files" src="https://github.com/user-attachments/assets/ccde1ba5-f907-4b9c-9835-27157f068c11" />
+<img width="193" height="226" alt="printer" src="https://github.com/user-attachments/assets/a1d7f795-6e4b-43ca-91a9-1d915b28fedc" />
+<img width="161" height="117" alt="piv1" src="https://github.com/user-attachments/assets/d4d1104a-7512-4310-a699-df8a36704b9b" />    
+<img width="292" height="181" alt="piv1" src="https://github.com/user-attachments/assets/caf2f50b-95a9-4488-900c-2023d0665a8b" />
 <br>
 <br>
 Now I'd like to run a very simple SMTP MTA on that same Pi that writes email attachments and serves them up.
