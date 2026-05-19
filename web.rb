@@ -1,29 +1,21 @@
 require "sinatra"
 require "fileutils"
+require "action_view"
+require "action_view/helpers"
 
 set :port, 8080       # Listen on port 8080
-set :bind, '0.0.0.0'  # Bind to all available interfaces
+set :bind, "0.0.0.0"  # Bind to all available interfaces
 
 DIRECTORY_TO_SERVE = File.expand_path("./files", __dir__)
 FileUtils.mkdir_p(DIRECTORY_TO_SERVE) unless File.directory?(DIRECTORY_TO_SERVE)
-
-def as_size(bytes)
-  units = %W[B KB MB GB TB PB EB]
-  return "0 B" if bytes <= 0
-
-  i = (Math.log(bytes) / Math.log(1024)).to_i
-  # Ensure we don't go out of bounds of the units array
-  i = [i, units.length - 1].min
-
-  size = bytes.to_f / (1024**i)
-  "%.2f %s" % [size, units[i]]
-end
 
 def full_listing
   files = []
   Dir.entries(DIRECTORY_TO_SERVE).reject { |f| File.directory?(f) }.each do |name|
     file = File.join(DIRECTORY_TO_SERVE, name)
-    files << {name: name, date: File.mtime(file).rfc2822, size: as_size(File.size(file))}
+    files << {name: name,
+      date: Format.new.when(File.mtime(file)),
+      size: Format.new.size(File.size(file))}
   end
   files.sort_by { |h| h[:name] }.reverse
 end
@@ -44,5 +36,18 @@ get "/download/:filename" do
   else
     status 404
     "File not found"
+  end
+end
+
+class Format
+  include ActionView::Helpers::DateHelper
+  include ActionView::Helpers::NumberHelper
+
+  def when(time)
+    time_ago_in_words(time)
+  end
+
+  def size(bytes)
+    number_to_human_size(bytes)
   end
 end
