@@ -1,5 +1,5 @@
 [Unit]
-Description=Scandalous Web
+Description=Scandalous Mail
 After=network.target
 
 [Service]
