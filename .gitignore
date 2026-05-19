@@ -1,3 +1,6 @@
 Gemfile.lock
 files
 *.swp
+.DS_Store
+.ruby-version
+pkgs

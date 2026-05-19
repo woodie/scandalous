@@ -22,7 +22,7 @@ ruby -v
 
 Specific gem packages will later be configured in the Gemfile.
 ```
-gem install mail pdftoimage actionview rackup puma sinatra
+gem install mail actionview rackup puma sinatra
 ```
 
 ### Open and map ports
@@ -39,11 +39,6 @@ sudo iptables -t nat -A PREROUTING -p tcp --dport 25 -j REDIRECT --to-ports 2525
 
 # Save your iptables rules
 sudo netfilter-persistent save
-```
-
-### Run development server
-```
-ruby web.rb -p 8080 -o 0.0.0.0
 ```
 
 ### Enable and run services

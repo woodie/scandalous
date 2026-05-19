@@ -17,12 +17,9 @@ Everything will be on my home network so there is no concern about having others
 Transactions should work something like this:
 1. Scanner sends email with attached PDF file to the Pi.
 2. SMTP MTA removes attachment, saves it with a timestamp filename.
-3. Website serves a listing of the recent files with (thumbnail,) file size and date.
+3. Website serves a listing of the recent files with file size and date.
 4. Older files are deleted when new files are received.
 
-I have newer models I could use, but the V1 Pi should be fine.
-I'll probably give it more storage, currently has only 80MB free.
-I assume I'll use `sinatra` to keep the website component minimal. 
-The `pdftoimage` gem (which uses `mini_magick`) should work for thumbnails.
-The `mail` gem (which uses `mini_mime`) should do what I need for the MTA,
-It can handle incoming emails and save attachments.
+The V1 Pi with around 80MB free should be fine.
+I'll use `sinatra` to keep the website component minimal.
+The `mail` and `midi-smtp-server` gems work for the MTA.
