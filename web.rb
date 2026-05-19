@@ -2,15 +2,15 @@ require "sinatra"
 require "action_view"
 require "action_view/helpers"
 
-set :port, 8080       # Listen on port 8080
-set :bind, "0.0.0.0"  # Bind to all available interfaces
+set :port, 8080
+set :bind, "0.0.0.0"
 
-DIRECTORY_TO_SERVE = File.expand_path("./files", __dir__)
+SCAN_FOLDER = File.expand_path("./files", __dir__)
 
 def full_listing
   files = []
-  Dir.entries(DIRECTORY_TO_SERVE).reject { |f| File.directory?(f) }.each do |name|
-    file = File.join(DIRECTORY_TO_SERVE, name)
+  Dir.entries(SCAN_FOLDER).reject { |f| File.directory?(f) }.each do |name|
+    file = File.join(SCAN_FOLDER, name)
     files << {name: name,
       date: Format.new.when(File.mtime(file)),
       size: Format.new.size(File.size(file))}
@@ -27,7 +27,7 @@ end
 
 # Route to download a specific file
 get "/download/:filename" do
-  file_path = File.join(DIRECTORY_TO_SERVE, params[:filename])
+  file_path = File.join(SCAN_FOLDER, params[:filename])
 
   if File.exist?(file_path)
     send_file file_path, disposition: :attachment, filename: params[:filename]
