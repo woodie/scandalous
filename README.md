@@ -8,7 +8,8 @@ and upgrading everything broke interoperability with the scanner.
 
 <img width="193" height="226" alt="printer" src="https://github.com/user-attachments/assets/a1d7f795-6e4b-43ca-91a9-1d915b28fedc" />  
 <img width="161" height="117" alt="piv1" src="https://github.com/user-attachments/assets/d4d1104a-7512-4310-a699-df8a36704b9b" />  
-<img width="292" height="181" alt="listing" src="https://github.com/user-attachments/assets/ab916820-3c45-447d-8137-b23b2984f672" />
+<img width="292" height="181" alt="listing" src="https://github.com/user-attachments/assets/b7e41c4f-d25b-436e-ba2d-0cf700c273ed" />
+
 
 Now I'd like to run a very simple SMTP MTA on that same Pi that writes email attachments and serves them up.
 Everything will be on my home network so there is no concern about having others access the scans.
