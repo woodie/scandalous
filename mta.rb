@@ -1,8 +1,10 @@
+require "fileutils"
 require "midi-smtp-server"
 require "mail"
 
 DIRECTORY_TO_SERVE = File.expand_path("./files", __dir__)
-OLD_FILE_THRESHOLD = 12 * 60 * 60 # 12 hours in seconds
+FileUtils.mkdir_p(DIRECTORY_TO_SERVE) unless File.directory?(DIRECTORY_TO_SERVE)
+OLD_FILE_THRESHOLD = Time.now - (24 * 60 * 60) # 24 hours ago
 
 class MySmtpd < MidiSmtpServer::Smtpd
   def on_message_data_event(ctx)
@@ -15,13 +17,13 @@ class MySmtpd < MidiSmtpServer::Smtpd
     rescue => e
       puts "Unable to save data for #{filename} because #{e.message}"
     end
-    Dir.glob(DIRECTORY_TO_SERVE).each do |file|
-      File.delete(file) if File.file?(file) && File.mtime(file) < (Time.now - OLD_FILE_THRESHOLD)
+    Dir.glob(DIRECTORY_TO_SERVE + "/*.pdf").each do |file|
+      File.delete(file) if File.file?(file) && File.mtime(file) < OLD_FILE_THRESHOLD
     end
   end
 end
 
-server = MySmtpd.new(ports: "2525", hosts: "0.0.0.0")
+server = MySmtpd.new(ports: 2525, hosts: "0.0.0.0")
 
 # save flag for Ctrl-C pressed
 flag_status_ctrl_c_pressed = false

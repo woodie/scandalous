@@ -1,5 +1,4 @@
 require "sinatra"
-require "fileutils"
 require "action_view"
 require "action_view/helpers"
 
@@ -7,7 +6,6 @@ set :port, 8080       # Listen on port 8080
 set :bind, "0.0.0.0"  # Bind to all available interfaces
 
 DIRECTORY_TO_SERVE = File.expand_path("./files", __dir__)
-FileUtils.mkdir_p(DIRECTORY_TO_SERVE) unless File.directory?(DIRECTORY_TO_SERVE)
 
 def full_listing
   files = []
