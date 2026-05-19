@@ -7,7 +7,7 @@ which was unreliable and is now shut down by Google. The OS running on the Pi wa
 and upgrading everything broke interoperability with the scanner.
 
 <img width="193" height="226" alt="printer" src="https://github.com/user-attachments/assets/a1d7f795-6e4b-43ca-91a9-1d915b28fedc" />
-<img width="161" height="117" alt="piv1" src="https://github.com/user-attachments/assets/d4d1104a-7512-4310-a699-df8a36704b9b" />    
+<img width="161" height="117" alt="piv1" src="https://github.com/user-attachments/assets/d4d1104a-7512-4310-a699-df8a36704b9b" /> &nbsp;
 <img width="292" height="181" alt="listing" src="https://github.com/user-attachments/assets/5c7a480d-249d-4637-ae91-e07db638f35b" />
 <br>
 <br>
@@ -21,5 +21,4 @@ Transactions should work something like this:
 4. Older files are deleted when new files are received.
 
 The V1 Pi with around 80MB free should be fine.
-I'll use `sinatra` to keep the website component minimal.
-The `mail` and `midi-smtp-server` gems work for the MTA.
+I'll use `sinatra` and `midi-smtp-server` to keep it simple.
