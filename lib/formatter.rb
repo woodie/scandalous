@@ -12,9 +12,9 @@ class Formatter
       files << {name: name,
         date: time_ago(File.mtime(file)),
         size: to_human(File.size(file))}
-    end 
+    end
     files.sort_by { |h| h[:name] }.reverse
-  end 
+  end
 
   def time_ago(time)
     time_ago_in_words(time)

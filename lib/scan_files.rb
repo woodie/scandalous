@@ -2,7 +2,7 @@ require "fileutils"
 
 class ScanFiles
   SCAN_FOLDER = File.expand_path("../files", __dir__)
-  ONE_DAY_AGO = Time.now - (24 * 60 * 60) 
+  ONE_DAY_AGO = Time.now - (24 * 60 * 60)
 
   def self.cleanup
     Dir.glob("#{SCAN_FOLDER}/*.pdf").each do |file|
