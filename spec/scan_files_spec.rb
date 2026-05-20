@@ -56,10 +56,10 @@ RSpec.describe ScanFiles do
       end
     end
 
-    context "with one attachments" do
+    context "with one attachment" do
       let(:attachments) { [double({content_type: "application/pdf"})] }
 
-      it "detache PDF files" do
+      it "detaches file" do
         expect(File).to receive(:open)
         subject
       end

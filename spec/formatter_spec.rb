@@ -37,7 +37,7 @@ RSpec.describe Formatter do
     context "with some bytes" do
       let(:bytes) { 9999 }
 
-      it "formats to size" do
+      it "formats nicely" do
         expect(subject).to eq("9.76 KB")
       end 
     end 
