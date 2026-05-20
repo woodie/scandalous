@@ -8,13 +8,13 @@ RSpec.describe Formatter do
     context "with path to file" do
       let(:path) { "/path/to/files" }
       let(:file) { "1234567890.pdf" }
-      let(:resp) { {date: "less than a minute", name: file, size: "9.76 KB"} }
+      let(:list) { [{date: "less than a minute", name: file, size: "9.76 KB"}] }
 
       it "returns a payload" do
         expect(Dir).to receive(:entries).with(path).and_return([file])
         expect(File).to receive(:mtime).and_return(Time.now)      
         expect(File).to receive(:size).and_return(9999)      
-        expect(subject).to eq([resp])
+        expect(subject).to eq(list)
       end 
     end 
   end 
