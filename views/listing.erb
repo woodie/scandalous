@@ -6,11 +6,11 @@
 </head>
 <body>
   <h2>Available Scans</h2>
-  <% if @files.empty? %>
+  <% if @listing.empty? %>
     <p>No files found in the directory.</p>
   <% else %>
     <ul>
-      <% @files.each do |file| %>
+      <% @listing.each do |file| %>
         <li>
           <a href="/download/<%= file[:name] %>">📄 <%= file[:size] %></a>
           <span><%= file[:date] %> ago</span>

@@ -7,15 +7,13 @@ set :bind, "0.0.0.0"
 
 # Route to list all files in the directory
 get "/" do
-  @files = Formatter.new.full_listing(ScanFiles::SCAN_FOLDER)
-
-  erb :full_listing
+  @listing = Formatter.new.listing(ScanFiles::SCAN_FOLDER)
+  erb :listing
 end
 
 # Route to download a specific file
 get "/download/:filename" do
   file_path = File.join(ScanFiles::SCAN_FOLDER, params[:filename])
-
   if File.exist?(file_path)
     send_file file_path, disposition: :attachment, filename: params[:filename]
   else

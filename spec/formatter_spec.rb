@@ -2,8 +2,8 @@ require "spec_helper"
 require_relative "../lib/formatter"
 
 RSpec.describe Formatter do
-  describe ".full_listing" do
-    subject { Formatter.new.full_listing(path) }
+  describe ".listing" do
+    subject { Formatter.new.listing(path) }
 
     context "with path to file" do
       let(:path) { "/path/to/files" }

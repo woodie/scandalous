@@ -5,7 +5,7 @@ class Formatter
   include ActionView::Helpers::DateHelper
   include ActionView::Helpers::NumberHelper
 
-  def full_listing(scan_folder)
+  def listing(scan_folder)
     files = []
     Dir.entries(scan_folder).reject { |f| File.directory?(f) }.each do |name|
       file = File.join(scan_folder, name)
