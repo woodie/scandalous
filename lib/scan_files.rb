@@ -12,7 +12,7 @@ class ScanFiles
 
   def self.detach(attachments)
     attachments.each do |attachment|
-      if attachment.content_type == "application/pdf"
+      if attachment.content_type.start_with?("application/pdf")
         filename = File.join(SCAN_FOLDER, "#{Time.now.to_i}.pdf")
         File.open(filename, "w+b", 0o644) { |f| f.write attachment.decoded }
       end
