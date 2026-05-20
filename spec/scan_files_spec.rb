@@ -63,6 +63,14 @@ RSpec.describe ScanFiles do
         expect(File).to receive(:open)
         subject
       end
+
+      context "when write fails" do
+        before { allow(File).to receive(:open).and_raise(IOError) }
+
+        it "catches the error" do
+          subject
+        end
+      end
     end
   end
 end

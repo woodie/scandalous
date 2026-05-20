@@ -16,8 +16,8 @@ class ScanFiles
         filename = File.join(SCAN_FOLDER, "#{Time.now.to_i}.pdf")
         File.open(filename, "w+b", 0o644) { |f| f.write attachment.decoded }
       end
-    rescue => e
-      puts "Unable to save data for #{filename} because #{e.message}"
+    rescue
+      # Unable to save file to disk
     end
   end
 end
