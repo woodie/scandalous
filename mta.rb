@@ -5,7 +5,7 @@ require_relative "lib/scan_files"
 class MySmtpd < MidiSmtpServer::Smtpd
   def on_message_data_event(ctx)
     ScanFiles.cleanup
-    Mail.read_from_string(ctx[:message][:data])
+    mail = Mail.read_from_string(ctx[:message][:data])
     ScanFiles.detach(mail.attachments)
   end
 end
