@@ -8,8 +8,18 @@ FileUtils.mkdir_p(SCAN_FOLDER) unless File.directory?(SCAN_FOLDER)
 
 class MySmtpd < MidiSmtpServer::Smtpd
   def on_message_data_event(ctx)
-    mail = Mail.read_from_string(ctx[:message][:data])
-    # Write new PDF scans
+    ditch_old_pdf_scans
+    write_new_pdf_scans
+  end
+
+  def ditch_old_pdf_scans
+    Dir.glob("#{SCAN_FOLDER}/*.pdf").each do |file|
+      File.delete(file) if File.file?(file) && File.mtime(file) < ONE_DAY_AGO
+    end
+  end
+
+  def write_new_pdf_scans
+    Mail.read_from_string(ctx[:message][:data])
     mail.attachments.each do |attachment|
       if attachment.content_type.start_with?("application/pdf")
         filename = File.join(SCAN_FOLDER, "#{Time.now.to_i}.pdf")
@@ -17,10 +27,6 @@ class MySmtpd < MidiSmtpServer::Smtpd
       end
     rescue => e
       puts "Unable to save data for #{filename} because #{e.message}"
-    end
-    # Remove old PDF scans
-    Dir.glob("#{SCAN_FOLDER}/*.pdf").each do |file|
-      File.delete(file) if File.file?(file) && File.mtime(file) < ONE_DAY_AGO
     end
   end
 end
