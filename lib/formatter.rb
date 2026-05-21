@@ -10,7 +10,7 @@ class Formatter
     Dir.entries(scan_folder).reject { |f| File.directory?(f) }.each do |name|
       file = File.join(scan_folder, name)
       files << {name: name,
-        date: time_ago(File.mtime(file)),
+        time: time_ago(File.mtime(file)),
         size: to_human(File.size(file))}
     end
     files.sort_by { |h| h[:name] }.reverse

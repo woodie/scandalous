@@ -13,7 +13,7 @@
       <% @listing.each do |file| %>
         <li>
           <a href="/download/<%= file[:name] %>">📄 <%= file[:size] %></a>
-          <span><%= file[:date] %> ago</span>
+          <span><%= file[:time] %> ago</span>
         </li>
       <% end %>
     </ul>
