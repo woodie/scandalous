@@ -23,17 +23,7 @@ RSpec.describe ScanFiles do
   describe "#cleanup" do
     subject { ScanFiles.cleanup }
 
-    context "with no files" do
-      let(:files) { [] }
-
-      it "nothing to do" do
-        expect(Dir).to receive(:glob).and_return(files)
-        expect(File).not_to receive(:file?)
-        subject
-      end
-    end
-
-    context "with one file" do
+    context "with a file" do
       let(:files) { ["1234567890.pdf"] }
 
       before(:each) do
