@@ -6,6 +6,7 @@ gem "pry"
 gem "mail"
 gem "pdftoimage"
 gem "sinatra"
+gem "rack-test"
 
 group :development do
   gem "standardrb"

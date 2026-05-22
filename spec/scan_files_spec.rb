@@ -2,6 +2,25 @@ require "spec_helper"
 require_relative "../lib/scan_files"
 
 RSpec.describe ScanFiles do
+  describe ".listing" do
+    subject { ScanFiles.listing }
+
+    context "with path to file" do
+      let(:time) { Time.now }
+      let(:size) { 11111111 }
+      let(:path) { "/path/to/files" }
+      let(:file) { "1234567890.pdf" }
+      let(:list) { [{time: time, name: file, size: size}] }
+
+      it "returns a payload" do
+        expect(Dir).to receive(:entries).and_return([file])
+        expect(File).to receive(:mtime).and_return(time)
+        expect(File).to receive(:size).and_return(size)
+        expect(subject).to eq(list)
+      end
+    end
+  end
+
   describe "#cleanup" do
     subject { ScanFiles.cleanup }
 

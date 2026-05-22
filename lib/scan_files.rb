@@ -4,6 +4,15 @@ class ScanFiles
   SCAN_FOLDER = File.expand_path("../files", __dir__)
   ONE_DAY_AGO = Time.now - (24 * 60 * 60)
 
+  def self.listing
+    files = []
+    Dir.entries(SCAN_FOLDER).reject { |f| File.directory?(f) }.each do |name|
+      file = File.join(SCAN_FOLDER, name)
+      files << {name: name, time: File.mtime(file), size: File.size(file)}
+    end
+    files.sort_by { |h| h[:name] }.reverse
+  end
+
   def self.cleanup
     Dir.glob(File.join(SCAN_FOLDER, "*.pdf")).each do |file|
       File.delete(file) if File.file?(file) && File.mtime(file) < ONE_DAY_AGO

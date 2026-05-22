@@ -12,8 +12,8 @@
     <ul>
       <% @listing.each do |file| %>
         <li>
-          <a href="/download/<%= file[:name] %>">📄 <%= file[:size] %></a>
-          <span><%= file[:time] %> ago</span>
+          <a href="/download/<%= file[:name] %>">📄 <%= number_to_human_size file[:size] %></a>
+          <span><%= time_ago_in_words file[:time] %> ago</span>
         </li>
       <% end %>
     </ul>
