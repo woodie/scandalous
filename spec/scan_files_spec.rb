@@ -8,7 +8,6 @@ RSpec.describe ScanFiles do
     context "with path to file" do
       let(:time) { Time.now }
       let(:size) { 11111111 }
-      let(:path) { "/path/to/files" }
       let(:file) { "1234567890.pdf" }
       let(:list) { [{time: time, name: file, size: size}] }
 
