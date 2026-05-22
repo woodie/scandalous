@@ -2,7 +2,7 @@ require "spec_helper"
 require_relative "../lib/scan_files"
 
 RSpec.describe ScanFiles do
-  describe ".listing" do
+  describe "#listing" do
     subject { ScanFiles.listing }
 
     context "with path to file" do
