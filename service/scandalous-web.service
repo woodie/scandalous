@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/home/someuser/workspace/scandalous
-ExecStart=/usr/bin/ruby web.rb
+ExecStart=bundle exec puma -C config/puma.rb
 Restart=always
 User=someuser
 

@@ -82,3 +82,23 @@ RSpec.describe ScanFiles do
     end
   end
 end
+
+__END__
+
+ScanFiles
+  #listing
+    with path to file
+      returns a payload
+  #cleanup
+    with a file
+      created right now
+        keeps the file
+      created yesterday
+        deletes the file
+  #detach
+    with no attachments
+      nothing to do
+    with one attachment
+      detaches file
+      when write fails
+        catches the error

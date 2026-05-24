@@ -3,14 +3,11 @@ require "action_view"
 require "action_view/helpers"
 require_relative "lib/scan_files"
 
-class MyApp < Sinatra::Base
+class WebApp < Sinatra::Base
   include ActionView::Helpers::DateHelper
   include ActionView::Helpers::NumberHelper
 
-  set :port, 8080
-  set :bind, "0.0.0.0"
-
-  # Route to list all files in the directory
+  # Route to list all available files
   get "/" do
     @listing = ScanFiles.listing
     erb :listing
@@ -27,5 +24,3 @@ class MyApp < Sinatra::Base
     end
   end
 end
-
-run MyApp.run!

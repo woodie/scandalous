@@ -2,21 +2,21 @@ source "http://rubygems.org"
 
 ruby "3.1.2", patchlevel: "20"
 
-gem "pry"
 gem "mail"
-gem "pdftoimage"
 gem "sinatra"
-gem "rack-test"
+gem "actionview"
+gem "rackup", "~> 2.3"
+gem "puma", "~> 8.0"
+gem "midi-smtp-server", "~> 3.1.2"
 
 group :development do
+  gem "pry"
   gem "standardrb"
 end
 
 group :test do
+  gem "rack-test"
   gem "rspec"
+  gem "rspec-html-matchers", "~> 0.10.0"
 end
 
-gem "rackup", "~> 2.3"
-gem "puma", "~> 8.0"
-
-gem 'midi-smtp-server', '~> 3.1.2'
