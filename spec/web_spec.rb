@@ -4,7 +4,7 @@ require "spec_helper"
 require_relative "../web"
 
 RSpec.describe WebApp do
-  let(:time) { Time.now.to_i }
+  let(:file) { "#{Time.now.to_i}.pdf" }
 
   def app
     WebApp
@@ -24,7 +24,7 @@ RSpec.describe WebApp do
 
     describe "download missing file" do
       it "responds with 404" do
-        get "/download/#{time}.pdf"
+        get "/download/#{file}"
         expect(last_response).not_to be_ok
         expect(last_response.status).to eq(404)
       end
@@ -32,22 +32,22 @@ RSpec.describe WebApp do
   end
 
   context "with a file" do
-    before { File.write(File.join(ScanFiles::SCAN_FOLDER, "#{time}.pdf"), :fake) }
+    before { File.write(File.join(ScanFiles::SCAN_FOLDER, file), :content) }
 
     describe "listing" do
       it "file description" do
         get "/"
         expect(last_response).to be_ok
         expect(last_response.body).to have_tag("h2", text: "Available Scans")
-        expect(last_response.body).to have_tag("a", href: "/download/#{time}.pdf")
-        expect(last_response.body).to have_tag("a", text: "📄 4 Bytes")
+        expect(last_response.body).to have_tag("a", href: "/download/#{file}")
+        expect(last_response.body).to have_tag("a", text: "📄 7 Bytes")
         expect(last_response.body).to have_tag("span", text: "less than a minute ago")
       end
     end
 
     describe "download actual file" do
       it "responds with 200" do
-        get "/download/#{time}.pdf"
+        get "/download/#{file}"
         expect(last_response).to be_ok
         expect(last_response.status).to eq(200)
       end
