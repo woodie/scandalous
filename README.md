@@ -22,3 +22,9 @@ Transactions should work something like this:
 
 The V1 Pi with around 80MB free should be fine.
 I'll use `sinatra` and `midi-smtp-server` to keep it simple.
+
+## Local file server 
+
+I set up Samba because setting up certs for HTTPS on an internal hosts is a pain. 
+
+<img width="349" height="171" alt="share" src="https://github.com/user-attachments/assets/32a7f3ae-4a4e-4347-9dab-bd7237620e07" />
