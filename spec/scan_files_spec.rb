@@ -2,6 +2,25 @@ require "spec_helper"
 require_relative "../lib/scan_files"
 
 RSpec.describe ScanFiles do
+  describe "#interface" do
+    let(:ext_host) { ENV["EXT_HOST"] }
+    let(:actual) { Net::HTTP.get_response(URI("https://api.ipify.org"))&.body }
+
+    subject { ScanFiles.interface }
+
+    it "indicates correct settings" do
+      expect(subject).to eq("✅ #{ext_host} = #{actual}")
+    end
+
+    context "with stale configuration" do
+      before { allow(Resolv).to receive(:getaddress).with(ext_host).and_return("0.0.0.0") }
+
+      it "indicates incorrect settings" do
+        expect(subject).to eq("⛔ #{ext_host} ≠ #{actual}")
+      end
+    end
+  end
+
   describe "#listing" do
     subject { ScanFiles.listing }
 
@@ -86,6 +105,10 @@ end
 __END__
 
 ScanFiles
+  #interface
+    indicates correct settings
+    with stale configuration
+      indicates incorrect settings
   #listing
     with path to file
       returns a payload

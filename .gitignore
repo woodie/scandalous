@@ -3,4 +3,5 @@ files
 *.swp
 .DS_Store
 .ruby-version
+.env
 pkgs

@@ -1,8 +1,24 @@
 require "fileutils"
+require "dotenv/load"
+require "net/http"
+require "resolv"
+require "uri"
 
 class ScanFiles
   SCAN_FOLDER = File.expand_path("../files", __dir__)
   ONE_DAY_AGO = Time.now - (24 * 60 * 60)
+  Dotenv.load
+
+  def self.interface
+    ext_host = ENV["EXT_HOST"] || "examle.com"
+    actual = Net::HTTP.get_response(URI("https://api.ipify.org"))&.body
+    stored = Resolv.getaddress(ext_host)
+    if actual == stored
+      "✅ #{ext_host} = #{actual}"
+    else
+      "⛔ #{ext_host} ≠ #{actual}"
+    end
+  end
 
   def self.listing
     files = []

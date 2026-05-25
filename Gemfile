@@ -5,10 +5,11 @@ ruby "3.1.2", patchlevel: "20"
 gem "mail"
 gem "sinatra"
 gem "actionview"
-gem "bake"
+gem "resolv"
 gem "puma", "~> 8.0"
 gem "rackup", "~> 2.3"
 gem "midi-smtp-server", "~> 3.1.2"
+gem "dotenv"
 
 group :development do
   gem "pry"

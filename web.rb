@@ -10,6 +10,7 @@ class WebApp < Sinatra::Base
   # Route to list all available files
   get "/" do
     @listing = ScanFiles.listing
+    @interface = ScanFiles.interface
     erb :listing
   end
 
