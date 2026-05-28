@@ -47,7 +47,6 @@ Install the web service
 ```
 sudo cp system/scandalous-web.service /etc/systemd/system/
 # Remember to edit the username
-sudo chmod a+rwx /etc/systemd/system/scandalous-web.service
 
 sudo systemctl enable scandalous-web
 sudo systemctl start scandalous-web
@@ -57,7 +56,6 @@ Install the mail service
 ```
 sudo cp system/scandalous-mta.service /etc/systemd/system/
 # Remember to edit the username
-sudo chmod a+rwx /etc/systemd/system/scandalous-mta.service
 
 sudo systemctl enable scandalous-mta
 sudo systemctl start scandalous-mta

@@ -3,10 +3,10 @@ Description=Scandalous Web
 After=network.target
 
 [Service]
-WorkingDirectory=/home/someuser/workspace/scandalous
+WorkingDirectory=/home/pi/workspace/scandalous
 ExecStart=puma -C config/puma.rb
 Restart=always
-User=someuser
+User=pi
 
 [Install]
 WantedBy=multi-user.target

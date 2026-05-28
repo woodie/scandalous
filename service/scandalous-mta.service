@@ -3,10 +3,10 @@ Description=Scandalous Mail
 After=network.target
 
 [Service]
-WorkingDirectory=/home/someuser/workspace/scandalous
+WorkingDirectory=/home/pi/workspace/scandalous
 ExecStart=/usr/bin/ruby mta.rb
 Restart=always
-User=someuser
+User=pi
 
 [Install]
 WantedBy=multi-user.target
