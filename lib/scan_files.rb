@@ -22,8 +22,8 @@ class ScanFiles
 
   def self.listing
     files = []
-    Dir.entries(SCAN_FOLDER).reject { |f| File.directory?(f) }.each do |name|
-      file = File.join(SCAN_FOLDER, name)
+    Dir.glob(File.join(SCAN_FOLDER, "*.pdf")).each do |file|
+      name = file.split('/').last
       files << {name: name, time: File.mtime(file), size: File.size(file)}
     end
     files.sort_by { |h| h[:name] }.reverse

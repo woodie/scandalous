@@ -27,11 +27,11 @@ RSpec.describe ScanFiles do
     context "with path to file" do
       let(:time) { Time.now }
       let(:size) { 11111111 }
-      let(:file) { "1234567890.pdf" }
-      let(:list) { [{time: time, name: file, size: size}] }
+      let(:name) { "1234567890.pdf" }
+      let(:list) { [{time: time, name: name, size: size}] }
 
       it "returns a payload" do
-        expect(Dir).to receive(:entries).and_return([file])
+        allow(Dir).to receive(:glob).and_return([".some/path/#{name}"])
         expect(File).to receive(:mtime).and_return(time)
         expect(File).to receive(:size).and_return(size)
         expect(subject).to eq(list)

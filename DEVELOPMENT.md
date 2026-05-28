@@ -1,4 +1,4 @@
-# Device configuration
+# Development
 
 ### Install Ruby
 
