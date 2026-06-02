@@ -8,8 +8,12 @@ RSpec.describe ScanFiles do
 
     subject { ScanFiles.interface }
 
-    it "indicates correct settings" do
-      expect(subject).to eq("✅ #{ext_host} = #{actual}")
+    context "with current configuration" do
+      before { allow(Resolv).to receive(:getaddress).with(ext_host).and_return(actual) }
+
+      it "indicates correct settings" do
+        expect(subject).to eq("✅ #{ext_host} = #{actual}")
+      end
     end
 
     context "with stale configuration" do
