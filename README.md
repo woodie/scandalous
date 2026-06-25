@@ -1,5 +1,9 @@
 # Scandalous: scan server
 
+[![Ruby](https://img.shields.io/badge/Ruby-3.1-red.svg)](https://www.ruby-lang.org/)
+[![Release](https://img.shields.io/github/v/release/woodie/scandalous.svg)](https://github.com/woodie/scandalous/releases/latest)
+[![License](https://img.shields.io/github/license/woodie/scandalous.svg)](LICENSE)
+
 I have an old HP Color Scanner/Printer from 2010 that requires an open relay to e-mail out scans,
 and no ISP (that I'm aware of) will provide an open relay these days. For a while, 
 I had Postfix (on a 512MB V1 Raspberry Pi) relaying to a Google account using an application specific password, 
