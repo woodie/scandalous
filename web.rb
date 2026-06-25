@@ -1,6 +1,8 @@
 require "sinatra/base"
 require "action_view"
 require "action_view/helpers"
+require "json"
+require "time"
 require_relative "lib/scan_files"
 
 class WebApp < Sinatra::Base
@@ -12,6 +14,22 @@ class WebApp < Sinatra::Base
     @listing = ScanFiles.listing
     @interface = ScanFiles.interface
     erb :listing
+  end
+
+  # Same listing as "/", as JSON -- this is the stopgap API for the zouk
+  # Mac client (see docs/adr/0001-remote-family-access.md) while the
+  # "real" lambada-native service is still TBD. No @interface check here;
+  # that's a slow external call that only matters for the human-facing page.
+  get "/scans.json" do
+    content_type :json
+    ScanFiles.listing.map { |f|
+      {
+        name: f[:name],
+        size: f[:size],
+        time: f[:time].iso8601,
+        url: "/download/#{f[:name]}"
+      }
+    }.to_json
   end
 
   # Route to download a specific file

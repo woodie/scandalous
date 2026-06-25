@@ -29,6 +29,15 @@ RSpec.describe WebApp do
         expect(last_response.status).to eq(404)
       end
     end
+
+    describe "scans.json" do
+      it "returns an empty list" do
+        get "/scans.json"
+        expect(last_response).to be_ok
+        expect(last_response.content_type).to eq("application/json")
+        expect(JSON.parse(last_response.body)).to eq([])
+      end
+    end
   end
 
   context "with a file" do
@@ -50,6 +59,18 @@ RSpec.describe WebApp do
         get "/download/#{file}"
         expect(last_response).to be_ok
         expect(last_response.status).to eq(200)
+      end
+    end
+
+    describe "scans.json" do
+      it "describes the file" do
+        get "/scans.json"
+        expect(last_response).to be_ok
+        entry = JSON.parse(last_response.body).first
+        expect(entry["name"]).to eq(file)
+        expect(entry["size"]).to eq(7)
+        expect(entry["url"]).to eq("/download/#{file}")
+        expect { Time.iso8601(entry["time"]) }.not_to raise_error
       end
     end
   end
