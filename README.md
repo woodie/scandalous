@@ -1,6 +1,7 @@
 # Scandalous: scan server
 
 [![Ruby](https://img.shields.io/badge/Ruby-3.1-red.svg)](https://www.ruby-lang.org/)
+[![CI](https://github.com/woodie/scandalous/actions/workflows/ci.yml/badge.svg)](https://github.com/woodie/scandalous/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/woodie/scandalous.svg)](https://github.com/woodie/scandalous/releases/latest)
 [![License](https://img.shields.io/github/license/woodie/scandalous.svg)](LICENSE)
 
