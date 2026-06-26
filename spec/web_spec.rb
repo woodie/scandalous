@@ -62,15 +62,15 @@ RSpec.describe WebApp do
       end
     end
 
+    # The exact JSON shape (name/size/time/url) is unit-tested directly
+    # against ScanFiles.scans_json in scan_files_spec.rb -- this just checks
+    # the route is wired up to it.
     describe "scans.json" do
-      it "describes the file" do
+      it "serves ScanFiles.scans_json as JSON" do
         get "/scans.json"
         expect(last_response).to be_ok
-        entry = JSON.parse(last_response.body).first
-        expect(entry["name"]).to eq(file)
-        expect(entry["size"]).to eq(7)
-        expect(entry["url"]).to eq("/download/#{file}")
-        expect { Time.iso8601(entry["time"]) }.not_to raise_error
+        expect(last_response.content_type).to eq("application/json")
+        expect(JSON.parse(last_response.body)).to eq(JSON.parse(ScanFiles.scans_json.to_json))
       end
     end
   end
@@ -84,8 +84,12 @@ WebApp
       no files found
     download missing file
       responds with 404
+    scans.json
+      returns an empty list
   with a file
     listing
       file description
     download actual file
       responds with 200
+    scans.json
+      serves ScanFiles.scans_json as JSON

@@ -1,32 +1,33 @@
 require "fileutils"
 require "dotenv/load"
-require "net/http"
-require "resolv"
-require "uri"
+require "time"
 
 class ScanFiles
   SCAN_FOLDER = File.expand_path("../files", __dir__)
   ONE_DAY_AGO = Time.now - (24 * 60 * 60)
   Dotenv.load
 
-  def self.interface
-    ext_host = ENV["EXT_HOST"] || "examle.com"
-    actual = Net::HTTP.get_response(URI("https://api.ipify.org"))&.body
-    stored = Resolv.getaddress(ext_host)
-    if actual == stored
-      "✅ #{ext_host} = #{actual}"
-    else
-      "⛔ #{ext_host} ≠ #{actual}"
-    end
-  end
-
   def self.listing
     files = []
     Dir.glob(File.join(SCAN_FOLDER, "*.pdf")).each do |file|
-      name = file.split('/').last
+      name = file.split("/").last
       files << {name: name, time: File.mtime(file), size: File.size(file)}
     end
     files.sort_by { |h| h[:name] }.reverse
+  end
+
+  # The shape consumed by /scans.json (and by the zouk client) -- pulled out
+  # of web.rb's route block so it's unit-testable without going through
+  # Sinatra/Rack::Test.
+  def self.scans_json
+    listing.map { |f|
+      {
+        name: f[:name],
+        size: f[:size],
+        time: f[:time].iso8601,
+        url: "/download/#{f[:name]}"
+      }
+    }
   end
 
   def self.cleanup

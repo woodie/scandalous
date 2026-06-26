@@ -2,29 +2,6 @@ require "spec_helper"
 require_relative "../lib/scan_files"
 
 RSpec.describe ScanFiles do
-  describe "#interface" do
-    let(:ext_host) { ENV["EXT_HOST"] }
-    let(:actual) { Net::HTTP.get_response(URI("https://api.ipify.org"))&.body }
-
-    subject { ScanFiles.interface }
-
-    context "with current configuration" do
-      before { allow(Resolv).to receive(:getaddress).with(ext_host).and_return(actual) }
-
-      xit "indicates correct settings" do
-        expect(subject).to eq("✅ #{ext_host} = #{actual}")
-      end
-    end
-
-    context "with stale configuration" do
-      before { allow(Resolv).to receive(:getaddress).with(ext_host).and_return("0.0.0.0") }
-
-      xit "indicates incorrect settings" do
-        expect(subject).to eq("⛔ #{ext_host} ≠ #{actual}")
-      end
-    end
-  end
-
   describe "#listing" do
     subject { ScanFiles.listing }
 
@@ -39,6 +16,32 @@ RSpec.describe ScanFiles do
         expect(File).to receive(:mtime).and_return(time)
         expect(File).to receive(:size).and_return(size)
         expect(subject).to eq(list)
+      end
+    end
+  end
+
+  describe "#scans_json" do
+    subject { ScanFiles.scans_json }
+
+    context "with no files" do
+      it "returns an empty array" do
+        allow(Dir).to receive(:glob).and_return([])
+        expect(subject).to eq([])
+      end
+    end
+
+    context "with a file" do
+      let(:time) { Time.now }
+      let(:size) { 11111111 }
+      let(:name) { "1234567890.pdf" }
+
+      it "returns the API-shaped payload, with the time formatted as ISO 8601" do
+        allow(Dir).to receive(:glob).and_return([".some/path/#{name}"])
+        expect(File).to receive(:mtime).and_return(time)
+        expect(File).to receive(:size).and_return(size)
+        expect(subject).to eq([
+          {name: name, size: size, time: time.iso8601, url: "/download/#{name}"}
+        ])
       end
     end
   end
@@ -109,13 +112,14 @@ end
 __END__
 
 ScanFiles
-  #interface
-    indicates correct settings
-    with stale configuration
-      indicates incorrect settings
   #listing
     with path to file
       returns a payload
+  #scans_json
+    with no files
+      returns an empty array
+    with a file
+      returns the API-shaped payload, with the time formatted as ISO 8601
   #cleanup
     with a file
       created right now

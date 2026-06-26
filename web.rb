@@ -2,7 +2,6 @@ require "sinatra/base"
 require "action_view"
 require "action_view/helpers"
 require "json"
-require "time"
 require_relative "lib/scan_files"
 
 class WebApp < Sinatra::Base
@@ -12,21 +11,13 @@ class WebApp < Sinatra::Base
   # Route to list all available files
   get "/" do
     @listing = ScanFiles.listing
-    @interface = ScanFiles.interface
     erb :listing
   end
 
   # Route to JSON list of files (for zouk client)
   get "/scans.json" do
     content_type :json
-    ScanFiles.listing.map { |f|
-      {
-        name: f[:name],
-        size: f[:size],
-        time: f[:time].iso8601,
-        url: "/download/#{f[:name]}"
-      }
-    }.to_json
+    ScanFiles.scans_json.to_json
   end
 
   # Route to download a specific file

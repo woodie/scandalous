@@ -5,7 +5,6 @@ ruby "3.1.2", patchlevel: "20"
 gem "mail"
 gem "sinatra"
 gem "actionview"
-gem "resolv"
 gem "puma", "~> 8.0"
 gem "rackup", "~> 2.3"
 gem "midi-smtp-server", "~> 3.1.2"
@@ -21,4 +20,3 @@ group :test do
   gem "rspec"
   gem "rspec-html-matchers", "~> 0.10.0"
 end
-
