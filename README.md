@@ -1,4 +1,4 @@
-# Scandalous: scan server
+# Scandalous scan server
 
 [![Ruby](https://img.shields.io/badge/Ruby-3.1-red.svg)](https://www.ruby-lang.org/)
 [![CI](https://github.com/woodie/scandalous/actions/workflows/ci.yml/badge.svg)](https://github.com/woodie/scandalous/actions/workflows/ci.yml)
