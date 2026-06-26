@@ -16,10 +16,7 @@ class WebApp < Sinatra::Base
     erb :listing
   end
 
-  # Same listing as "/", as JSON -- this is the stopgap API for the zouk
-  # Mac client (see docs/adr/0001-remote-family-access.md) while the
-  # "real" lambada-native service is still TBD. No @interface check here;
-  # that's a slow external call that only matters for the human-facing page.
+  # Route to JSON list of files (for zouk client)
   get "/scans.json" do
     content_type :json
     ScanFiles.listing.map { |f|
