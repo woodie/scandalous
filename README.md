@@ -26,5 +26,3 @@ The V1 Pi with around 80MB free should be fine.
 I'll use `sinatra` and `midi-smtp-server` to keep it simple.
 
 If you want to use Samba to serve the files see the [lambada project](https://github.com/woodie/lambada).
-
-<img width="368" height="168" alt="more" src="https://github.com/user-attachments/assets/f38661d8-886e-43de-8e18-8e9ee2032afe" />
