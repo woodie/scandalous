@@ -40,7 +40,7 @@ RSpec.describe ScanFiles do
         expect(File).to receive(:mtime).and_return(time)
         expect(File).to receive(:size).and_return(size)
         expect(subject).to eq([
-          {name: name, size: size, time: time.iso8601, url: "/download/#{name}"}
+          {name: name, size: size, time: time.iso8601, path: "/download/#{name}"}
         ])
       end
     end

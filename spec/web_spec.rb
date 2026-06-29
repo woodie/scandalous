@@ -30,9 +30,9 @@ RSpec.describe WebApp do
       end
     end
 
-    describe "scans.json" do
+    describe "files.json" do
       it "returns an empty list" do
-        get "/scans.json"
+        get "/files.json"
         expect(last_response).to be_ok
         expect(last_response.content_type).to eq("application/json")
         expect(JSON.parse(last_response.body)).to eq([])
@@ -62,9 +62,9 @@ RSpec.describe WebApp do
       end
     end
 
-    describe "scans.json" do
+    describe "files.json" do
       it "serves ScanFiles.scans_json as JSON" do
-        get "/scans.json"
+        get "/files.json"
         expect(last_response).to be_ok
         expect(last_response.content_type).to eq("application/json")
         expect(JSON.parse(last_response.body)).to eq(JSON.parse(ScanFiles.scans_json.to_json))
@@ -81,12 +81,12 @@ WebApp
       no files found
     download missing file
       responds with 404
-    scans.json
+    files.json
       returns an empty list
   with a file
     listing
       file description
     download actual file
       responds with 200
-    scans.json
+    files.json
       serves ScanFiles.scans_json as JSON

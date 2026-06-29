@@ -15,7 +15,7 @@ class WebApp < Sinatra::Base
   end
 
   # Route to JSON list of files (for zouk client)
-  get "/scans.json" do
+  get "/files.json" do
     content_type :json
     ScanFiles.scans_json.to_json
   end
