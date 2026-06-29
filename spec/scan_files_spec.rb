@@ -35,7 +35,7 @@ RSpec.describe ScanFiles do
       let(:size) { 11111111 }
       let(:name) { "1234567890.pdf" }
 
-      it "returns the API-shaped payload, with the time formatted as ISO 8601" do
+      it "returns a payload" do
         allow(Dir).to receive(:glob).and_return([".some/path/#{name}"])
         expect(File).to receive(:mtime).and_return(time)
         expect(File).to receive(:size).and_return(size)
@@ -119,7 +119,7 @@ ScanFiles
     with no files
       returns an empty array
     with a file
-      returns the API-shaped payload, with the time formatted as ISO 8601
+      returns a payload
   #cleanup
     with a file
       created right now

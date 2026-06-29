@@ -62,9 +62,6 @@ RSpec.describe WebApp do
       end
     end
 
-    # The exact JSON shape (name/size/time/url) is unit-tested directly
-    # against ScanFiles.scans_json in scan_files_spec.rb -- this just checks
-    # the route is wired up to it.
     describe "scans.json" do
       it "serves ScanFiles.scans_json as JSON" do
         get "/scans.json"
