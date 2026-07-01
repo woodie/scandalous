@@ -12,11 +12,28 @@
     <ul>
       <% @listing.each do |file| %>
         <li>
+          <button type="button" class="delete" onclick="deleteFile('<%= file[:name] %>', '<%= time_ago_in_words file[:time] %>')">🗑</button>
           <a href="/download/<%= file[:name] %>">📄 <%= number_to_human_size file[:size] %></a>
           <span><%= time_ago_in_words file[:time] %> ago</span>
         </li>
       <% end %>
     </ul>
   <% end %>
+  <script>
+    function deleteFile(name, timeAgo) {
+      if (!confirm('Delete this scan from ' + timeAgo + ' ago?')) return;
+      fetch('/download/' + encodeURIComponent(name), { method: 'DELETE' })
+        .then(function (res) {
+          if (res.ok) {
+            location.reload();
+          } else {
+            alert('Delete failed.');
+          }
+        })
+        .catch(function () {
+          alert('Delete failed.');
+        });
+    }
+  </script>
 </body>
 </html>

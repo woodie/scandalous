@@ -30,6 +30,14 @@ RSpec.describe WebApp do
       end
     end
 
+    describe "delete missing file" do
+      it "responds with 404" do
+        delete "/download/#{file}"
+        expect(last_response).not_to be_ok
+        expect(last_response.status).to eq(404)
+      end
+    end
+
     describe "files.json" do
       it "returns an empty list" do
         get "/files.json"
@@ -62,6 +70,14 @@ RSpec.describe WebApp do
       end
     end
 
+    describe "delete actual file" do
+      it "responds with 204 and removes the file" do
+        delete "/download/#{file}"
+        expect(last_response.status).to eq(204)
+        expect(File.exist?(File.join(ScanFiles::SCAN_FOLDER, file))).to be false
+      end
+    end
+
     describe "files.json" do
       it "serves ScanFiles.scans_json as JSON" do
         get "/files.json"
@@ -81,6 +97,8 @@ WebApp
       no files found
     download missing file
       responds with 404
+    delete missing file
+      responds with 404
     files.json
       returns an empty list
   with a file
@@ -88,5 +106,7 @@ WebApp
       file description
     download actual file
       responds with 200
+    delete actual file
+      responds with 204 and removes the file
     files.json
       serves ScanFiles.scans_json as JSON

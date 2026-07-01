@@ -30,4 +30,16 @@ class WebApp < Sinatra::Base
       "File not found"
     end
   end
+
+  # Route to delete a specific file
+  delete "/download/:filename" do
+    file_path = File.join(ScanFiles::SCAN_FOLDER, params[:filename])
+    if File.exist?(file_path)
+      File.delete(file_path)
+      status 204
+    else
+      status 404
+      "File not found"
+    end
+  end
 end
