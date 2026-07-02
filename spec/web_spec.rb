@@ -11,7 +11,7 @@ RSpec.describe WebApp do
   end
 
   context "with no files" do
-    before { FileUtils.rm_rf(Dir.glob(File.join(ScanFiles::SCAN_FOLDER, "*.pdf"))) }
+    before { FileUtils.rm_rf(Dir.glob(File.join(ScanFiles.scan_folder, "*.pdf"))) }
 
     describe "listing" do
       it "no files found" do
@@ -49,7 +49,7 @@ RSpec.describe WebApp do
   end
 
   context "with a file" do
-    before { File.write(File.join(ScanFiles::SCAN_FOLDER, file), :content) }
+    before { File.write(File.join(ScanFiles.scan_folder, file), :content) }
 
     describe "listing" do
       it "file description" do
@@ -74,7 +74,7 @@ RSpec.describe WebApp do
       it "responds with 204 and removes the file" do
         delete "/download/#{file}"
         expect(last_response.status).to eq(204)
-        expect(File.exist?(File.join(ScanFiles::SCAN_FOLDER, file))).to be false
+        expect(File.exist?(File.join(ScanFiles.scan_folder, file))).to be false
       end
     end
 

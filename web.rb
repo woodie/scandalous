@@ -22,7 +22,7 @@ class WebApp < Sinatra::Base
 
   # Route to download a specific file
   get "/download/:filename" do
-    file_path = File.join(ScanFiles::SCAN_FOLDER, params[:filename])
+    file_path = File.join(ScanFiles.scan_folder, params[:filename])
     if File.exist?(file_path)
       send_file file_path, disposition: :attachment, filename: params[:filename]
     else
@@ -33,7 +33,7 @@ class WebApp < Sinatra::Base
 
   # Route to delete a specific file
   delete "/download/:filename" do
-    file_path = File.join(ScanFiles::SCAN_FOLDER, params[:filename])
+    file_path = File.join(ScanFiles.scan_folder, params[:filename])
     if File.exist?(file_path)
       File.delete(file_path)
       status 204

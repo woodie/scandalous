@@ -3,13 +3,17 @@ require "dotenv/load"
 require "time"
 
 class ScanFiles
-  SCAN_FOLDER = File.expand_path("../attachments", __dir__)
   ONE_DAY_AGO = Time.now - (24 * 60 * 60)
   Dotenv.load
 
+  class << self
+    attr_accessor :scan_folder
+  end
+  self.scan_folder = File.expand_path("../attachments", __dir__)
+
   def self.listing
     files = []
-    Dir.glob(File.join(SCAN_FOLDER, "*.pdf")).each do |file|
+    Dir.glob(File.join(scan_folder, "*.pdf")).each do |file|
       name = file.split("/").last
       files << {name: name, time: File.mtime(file), size: File.size(file)}
     end
@@ -28,7 +32,7 @@ class ScanFiles
   end
 
   def self.cleanup
-    Dir.glob(File.join(SCAN_FOLDER, "*.pdf")).each do |file|
+    Dir.glob(File.join(scan_folder, "*.pdf")).each do |file|
       File.delete(file) if File.file?(file) && File.mtime(file) < ONE_DAY_AGO
     end
   end
@@ -36,7 +40,7 @@ class ScanFiles
   def self.detach(attachments)
     attachments.each do |attachment|
       if attachment.content_type.start_with?("application/pdf")
-        filename = File.join(SCAN_FOLDER, "#{Time.now.to_i}.pdf")
+        filename = File.join(scan_folder, "#{Time.now.to_i}.pdf")
         File.open(filename, "w+b", 0o644) { |f| f.write attachment.decoded }
       end
     rescue
@@ -45,4 +49,4 @@ class ScanFiles
   end
 end
 
-FileUtils.mkdir_p(ScanFiles::SCAN_FOLDER) unless File.directory?(ScanFiles::SCAN_FOLDER)
+FileUtils.mkdir_p(ScanFiles.scan_folder) unless File.directory?(ScanFiles.scan_folder)
