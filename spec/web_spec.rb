@@ -52,13 +52,21 @@ RSpec.describe WebApp do
     before { File.write(File.join(ScanFiles.scan_folder, file), :content) }
 
     describe "listing" do
-      it "file description" do
+      it "displays a file listing" do
         get "/"
         expect(last_response).to be_ok
         expect(last_response.body).to have_tag("h2", text: "Available Scans")
         expect(last_response.body).to have_tag("a", href: "/download/#{file}")
         expect(last_response.body).to have_tag("a", text: "📄 7 Bytes")
         expect(last_response.body).to have_tag("span", text: "less than a minute ago")
+      end
+
+      it "wires the delete confirm dialog with the full message" do
+        get "/"
+        expect(last_response.body).to have_tag(
+          "button.delete",
+          onclick: "deleteFile('#{file}', 'Delete this scan from less than a minute ago?')"
+        )
       end
     end
 
@@ -88,25 +96,3 @@ RSpec.describe WebApp do
     end
   end
 end
-
-__END__
-
-WebApp
-  with no files
-    listing
-      no files found
-    download missing file
-      responds with 404
-    delete missing file
-      responds with 404
-    files.json
-      returns an empty list
-  with a file
-    listing
-      file description
-    download actual file
-      responds with 200
-    delete actual file
-      responds with 204 and removes the file
-    files.json
-      serves ScanFiles.scans_json as JSON
