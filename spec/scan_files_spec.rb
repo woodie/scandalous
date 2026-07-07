@@ -5,7 +5,6 @@ require "base64"
 require_relative "../lib/scan_files"
 
 RSpec.describe ScanFiles do
-
   let(:plain_message) do
     "From: sender@example.com\r\n" \
     "Content-Type: text/plain\r\n" \
@@ -21,7 +20,7 @@ RSpec.describe ScanFiles do
     "--boundary--\r\n"
   end
 
-  let(:multipart_message ) do
+  let(:multipart_message) do
     "From: sender@example.com\r\n" \
     "Content-Type: multipart/mixed; boundary=boundary\r\n" \
     "\r\n--boundary\r\n" \
@@ -30,7 +29,7 @@ RSpec.describe ScanFiles do
     "--boundary--\r\n"
   end
 
-  let(:base64_pdf_message ) do
+  let(:base64_pdf_message) do
     "From: sender@example.com\r\n" \
     "Content-Type: multipart/mixed; boundary=boundary\r\n" \
     "\r\n--boundary\r\n" \
