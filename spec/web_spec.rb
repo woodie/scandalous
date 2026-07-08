@@ -1,6 +1,6 @@
 ENV["APP_ENV"] = "test"
 
-require 'active_support/time'
+require "active_support/time"
 require "spec_helper"
 require_relative "../web"
 
@@ -98,6 +98,16 @@ RSpec.describe WebApp do
             get "/"
             expect(last_response.body).to have_tag("span", text: "1 day ago")
           end
+        end
+      end
+
+      context "when files can be newer" do
+        let(:time) { Time.now + 3.minutes }
+        before { File.utime(time, time, File.join(ScanFiles.scan_folder, file)) }
+
+        it "displays in the past" do
+          get "/"
+          expect(last_response.body).to have_tag("span", text: "3 minutes ago")
         end
       end
 
