@@ -1,5 +1,6 @@
 ENV["APP_ENV"] = "test"
 
+require 'active_support/time'
 require "spec_helper"
 require_relative "../web"
 
@@ -58,15 +59,52 @@ RSpec.describe WebApp do
         expect(last_response.body).to have_tag("h2", text: "Available Scans")
         expect(last_response.body).to have_tag("a", href: "/download/#{file}")
         expect(last_response.body).to have_tag("a", text: "📄 7 Bytes")
-        expect(last_response.body).to have_tag("span", text: "less than a minute ago")
+      end
+
+      context "with files can be older" do
+        before { File.utime(time, time, File.join(ScanFiles.scan_folder, file)) }
+
+        context "just now" do
+          let(:time) { Time.now }
+
+          it "displays less than a minute ago" do
+            get "/"
+            expect(last_response.body).to have_tag("span", text: "less than a minute ago")
+          end
+        end
+
+        context "three minutes ago" do
+          let(:time) { Time.now - 3.minutes }
+
+          it "displays less than 3 minutes ago" do
+            get "/"
+            expect(last_response.body).to have_tag("span", text: "3 minutes ago")
+          end
+        end
+
+        context "fifteen hours ago" do
+          let(:time) { Time.now - 15.hours }
+
+          it "displays about 15 hours" do
+            get "/"
+            expect(last_response.body).to have_tag("span", text: "about 15 hours ago")
+          end
+        end
+
+        context "thirty hours ago" do
+          let(:time) { Time.now - 30.hours }
+
+          it "displays 1 day" do
+            get "/"
+            expect(last_response.body).to have_tag("span", text: "1 day ago")
+          end
+        end
       end
 
       it "wires the delete confirm dialog with the full message" do
         get "/"
-        expect(last_response.body).to have_tag(
-          "button.delete",
-          onclick: "deleteFile('#{file}', 'Delete this scan from less than a minute ago?')"
-        )
+        expect(last_response.body).to have_tag("button.delete",
+          onclick: "deleteFile('#{file}', 'Delete this scan from less than a minute ago?')")
       end
     end
 
