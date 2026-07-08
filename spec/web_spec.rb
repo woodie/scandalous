@@ -84,7 +84,7 @@ RSpec.describe WebApp do
         context "fifteen hours ago" do
           let(:time) { Time.now - 15 * 3600 }
 
-          it "displays 15 hours ago, with no 'about' prefix" do
+          it "displays 15 hours ago" do
             get "/"
             expect(last_response.body).to have_tag("span", text: "15 hours ago")
           end
