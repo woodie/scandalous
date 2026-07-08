@@ -8,7 +8,7 @@ gem "puma", "~> 8.0"
 gem "rackup", "~> 2.3"
 gem "midi-smtp-server", "~> 3.1.2"
 gem "dotenv"
-gem "humane", github: "woodie/humane-ruby", tag: "v0.1.0" # not yet on RubyGems.org; swap for a version pin once published
+gem "humane", "~> 0.1"
 
 group :development do
   gem "pry"
