@@ -85,7 +85,7 @@ RSpec.describe WebApp do
         context "fifteen hours ago" do
           let(:time) { Time.now - 15.hours }
 
-          it "displays about 15 hours" do
+          it "displays about 15 hours ago" do
             get "/"
             expect(last_response.body).to have_tag("span", text: "about 15 hours ago")
           end
@@ -94,7 +94,7 @@ RSpec.describe WebApp do
         context "thirty hours ago" do
           let(:time) { Time.now - 30.hours }
 
-          it "displays 1 day" do
+          it "displays 1 day ago" do
             get "/"
             expect(last_response.body).to have_tag("span", text: "1 day ago")
           end
