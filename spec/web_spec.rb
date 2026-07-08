@@ -85,9 +85,9 @@ RSpec.describe WebApp do
         context "fifteen hours ago" do
           let(:time) { Time.now - 15.hours }
 
-          it "displays about 15 hours ago" do
+          it "displays 15 hours ago, with no 'about' prefix" do
             get "/"
-            expect(last_response.body).to have_tag("span", text: "about 15 hours ago")
+            expect(last_response.body).to have_tag("span", text: "15 hours ago")
           end
         end
 
@@ -105,9 +105,9 @@ RSpec.describe WebApp do
         let(:time) { Time.now + 3.minutes }
         before { File.utime(time, time, File.join(ScanFiles.scan_folder, file)) }
 
-        it "displays in the past" do
+        it "displays 3 minutes from now" do
           get "/"
-          expect(last_response.body).to have_tag("span", text: "3 minutes ago")
+          expect(last_response.body).to have_tag("span", text: "3 minutes from now")
         end
       end
 

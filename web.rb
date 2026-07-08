@@ -1,21 +1,19 @@
 require "sinatra/base"
-require "action_view"
-require "action_view/helpers"
+require "humane"
 require "json"
 require_relative "lib/scan_files"
 
 class WebApp < Sinatra::Base
-  include ActionView::Helpers::DateHelper
+  SIZE_FORMATTER = Humane::SizeFormatter.new
+  TIME_FORMATTER = Humane::TimeFormatter.new
 
   helpers do
-    # Matches Finder: 1000-based math, capitalized KB/MB/... labels.
     def human_size(size)
-      units = %w[B KB MB GB TB PB EB]
-      return "#{size} B" if size < 1000
+      SIZE_FORMATTER.string(from_byte_count: size)
+    end
 
-      exponent = [(Math.log(size) / Math.log(1000)).to_i, units.size - 1].min
-      rounded = (size / (1000.0**exponent) * 10).round / 10.0
-      rounded < 10 ? format("%.1f %s", rounded, units[exponent]) : format("%.0f %s", rounded, units[exponent])
+    def time_ago(time)
+      TIME_FORMATTER.string(at: time, relative_to: Time.now)
     end
   end
 
