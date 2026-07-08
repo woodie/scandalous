@@ -50,7 +50,7 @@ RSpec.describe WebApp do
   end
 
   context "with a file" do
-    before { File.write(File.join(ScanFiles.scan_folder, file), :content) }
+    before { File.write(File.join(ScanFiles.scan_folder, file), "content." * 9999) }
 
     describe "listing" do
       it "displays a file listing" do
@@ -58,7 +58,7 @@ RSpec.describe WebApp do
         expect(last_response).to be_ok
         expect(last_response.body).to have_tag("h2", text: "Available Scans")
         expect(last_response.body).to have_tag("a", href: "/download/#{file}")
-        expect(last_response.body).to have_tag("a", text: "📄 7 Bytes")
+        expect(last_response.body).to have_tag("a", text: "📄 78.1 KB")
       end
 
       context "with files can be older" do
