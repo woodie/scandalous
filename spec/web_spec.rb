@@ -1,6 +1,5 @@
 ENV["APP_ENV"] = "test"
 
-require "active_support/time"
 require "spec_helper"
 require_relative "../web"
 
@@ -74,7 +73,7 @@ RSpec.describe WebApp do
         end
 
         context "three minutes ago" do
-          let(:time) { Time.now - 3.minutes }
+          let(:time) { Time.now - 3 * 60 }
 
           it "displays less than 3 minutes ago" do
             get "/"
@@ -83,7 +82,7 @@ RSpec.describe WebApp do
         end
 
         context "fifteen hours ago" do
-          let(:time) { Time.now - 15.hours }
+          let(:time) { Time.now - 15 * 3600 }
 
           it "displays 15 hours ago, with no 'about' prefix" do
             get "/"
@@ -92,7 +91,7 @@ RSpec.describe WebApp do
         end
 
         context "thirty hours ago" do
-          let(:time) { Time.now - 30.hours }
+          let(:time) { Time.now - 30 * 3600 }
 
           it "displays 1 day ago" do
             get "/"
@@ -102,7 +101,7 @@ RSpec.describe WebApp do
       end
 
       context "when files can be newer" do
-        let(:time) { Time.now + 3.minutes }
+        let(:time) { Time.now + 3 * 60 }
         before { File.utime(time, time, File.join(ScanFiles.scan_folder, file)) }
 
         it "displays 3 minutes from now" do
