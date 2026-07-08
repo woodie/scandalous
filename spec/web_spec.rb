@@ -58,7 +58,7 @@ RSpec.describe WebApp do
         expect(last_response).to be_ok
         expect(last_response.body).to have_tag("h2", text: "Available Scans")
         expect(last_response.body).to have_tag("a", href: "/download/#{file}")
-        expect(last_response.body).to have_tag("a", text: "📄 78.1 KB")
+        expect(last_response.body).to have_tag("a", text: "📄 80 KB")
       end
 
       context "with files can be older" do

@@ -14,7 +14,7 @@
         <li>
           <button type="button" class="delete" onclick="deleteFile('<%= file[:name] %>',
           '<%= "Delete this scan from #{time_ago_in_words file[:time]} ago?" %>')">🗑</button>
-          <a href="/download/<%= file[:name] %>">📄 <%= number_to_human_size file[:size] %></a>
+          <a href="/download/<%= file[:name] %>">📄 <%= human_size file[:size] %></a>
           <span><%= time_ago_in_words file[:time] %> ago</span>
         </li>
       <% end %>

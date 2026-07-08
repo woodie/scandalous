@@ -6,7 +6,18 @@ require_relative "lib/scan_files"
 
 class WebApp < Sinatra::Base
   include ActionView::Helpers::DateHelper
-  include ActionView::Helpers::NumberHelper
+
+  helpers do
+    # Matches Finder: 1000-based math, capitalized KB/MB/... labels.
+    def human_size(size)
+      units = %w[B KB MB GB TB PB EB]
+      return "#{size} B" if size < 1000
+
+      exponent = [(Math.log(size) / Math.log(1000)).to_i, units.size - 1].min
+      rounded = (size / (1000.0**exponent) * 10).round / 10.0
+      rounded < 10 ? format("%.1f %s", rounded, units[exponent]) : format("%.0f %s", rounded, units[exponent])
+    end
+  end
 
   # Route to list all available files
   get "/" do
