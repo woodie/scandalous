@@ -104,9 +104,9 @@ RSpec.describe WebApp do
         let(:time) { Time.now + 3 * 60 }
         before { File.utime(time, time, File.join(ScanFiles.scan_folder, file)) }
 
-        it "displays 3 minutes from now" do
+        it "displays in 3 minutes" do
           get "/"
-          expect(last_response.body).to have_tag("span", text: "3 minutes from now")
+          expect(last_response.body).to have_tag("span", text: "in 3 minutes")
         end
       end
 
