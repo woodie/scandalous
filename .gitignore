@@ -5,3 +5,5 @@ attachments
 .ruby-version
 .env
 pkgs
+node_modules
+package-lock.json
