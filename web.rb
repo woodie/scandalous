@@ -4,16 +4,13 @@ require "json"
 require_relative "lib/scan_files"
 
 class WebApp < Sinatra::Base
-  SIZE_FORMATTER = Humane::SizeFormatter.new
-  TIME_FORMATTER = Humane::TimeFormatter.new
-
   helpers do
     def human_size(size)
-      SIZE_FORMATTER.string(from_byte_count: size)
+      Humane::SizeFormatter.new.string(from_byte_count: size)
     end
 
     def time_ago(time)
-      TIME_FORMATTER.string(at: time, relative_to: Time.now)
+      Humane::TimeFormatter.new.string(at: time, relative_to: Time.now)
     end
   end
 
