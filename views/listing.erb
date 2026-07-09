@@ -20,21 +20,6 @@
       <% end %>
     </ul>
   <% end %>
-  <script>
-    function deleteFile(name, confirmMessage) {
-      if (!confirm(confirmMessage)) return;
-      fetch('/download/' + encodeURIComponent(name), { method: 'DELETE' })
-        .then(function (res) {
-          if (res.ok) {
-            location.reload();
-          } else {
-            alert('Delete failed.');
-          }
-        })
-        .catch(function () {
-          alert('Delete failed.');
-        });
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
