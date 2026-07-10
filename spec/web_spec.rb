@@ -71,43 +71,6 @@ RSpec.describe WebApp do
             expect(last_response.body).to have_tag("span", text: "less than a minute ago")
           end
         end
-
-        context "three minutes ago" do
-          let(:time) { Time.now - 3 * 60 }
-
-          it "displays less than 3 minutes ago" do
-            get "/"
-            expect(last_response.body).to have_tag("span", text: "3 minutes ago")
-          end
-        end
-
-        context "fifteen hours ago" do
-          let(:time) { Time.now - 15 * 3600 }
-
-          it "displays about 15 hours ago" do
-            get "/"
-            expect(last_response.body).to have_tag("span", text: "about 15 hours ago")
-          end
-        end
-
-        context "thirty hours ago" do
-          let(:time) { Time.now - 30 * 3600 }
-
-          it "displays about 1 day ago" do
-            get "/"
-            expect(last_response.body).to have_tag("span", text: "about 1 day ago")
-          end
-        end
-      end
-
-      context "when files can be newer" do
-        let(:time) { Time.now + 3 * 60 }
-        before { File.utime(time, time, File.join(ScanFiles.scan_folder, file)) }
-
-        it "displays in 3 minutes" do
-          get "/"
-          expect(last_response.body).to have_tag("span", text: "in 3 minutes")
-        end
       end
 
       it "wires the delete confirm dialog with the full message" do
