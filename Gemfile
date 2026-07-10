@@ -8,7 +8,7 @@ gem "puma", "~> 8.0"
 gem "rackup", "~> 2.3"
 gem "midi-smtp-server", "~> 3.1.2"
 gem "dotenv"
-gem "humane", "~> 0.4.0"
+gem "humane", "~> 0.5.0"
 
 group :development do
   gem "pry"
