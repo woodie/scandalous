@@ -10,7 +10,7 @@ class WebApp < Sinatra::Base
     end
 
     def time_ago(time)
-      Humane::TimeFormatter.new.string(at: time, relative_to: Time.now)
+      Humane::TimeFormatter.new(approximate: true).string(at: time, relative_to: Time.now)
     end
   end
 
