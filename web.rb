@@ -2,17 +2,13 @@ require "sinatra/base"
 require "humane"
 require "json"
 require_relative "lib/scan_files"
+require "action_view"
+require 'active_support/core_ext/module/attribute_accessors'
+
 
 class WebApp < Sinatra::Base
-  helpers do
-    def human_size(size)
-      Humane::SizeFormatter.new.string(from_byte_count: size)
-    end
-
-    def time_ago(time)
-      Humane::TimeFormatter.new(approximate: true).string(at: time, relative_to: Time.now)
-    end
-  end
+  include ActionView::Helpers::DateHelper
+  include ActionView::Helpers::NumberHelper
 
   # Route to list all available files
   get "/" do
