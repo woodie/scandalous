@@ -8,7 +8,10 @@ gem "puma", "~> 8.0"
 gem "rackup", "~> 2.3"
 gem "midi-smtp-server", "~> 3.1.2"
 gem "dotenv"
-gem "humane", "~> 0.5.0"
+# Local dev reference while adopting humane-ruby v0.9.0's new API -- not yet
+# published. Revert to a version pin (gem "humane", "~> 0.9") once it's
+# tagged, pushed, and released to RubyGems -- see docs/releases/2.7.0.md.
+gem "humane", path: "../humane-ruby"
 
 group :development do
   gem "pry"

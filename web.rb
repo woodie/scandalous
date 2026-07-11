@@ -6,11 +6,13 @@ require_relative "lib/scan_files"
 class WebApp < Sinatra::Base
   helpers do
     def human_size(size)
-      Humane::SizeFormatter.new.string(from_byte_count: size)
+      Humane::SizeFormatter.human_size(size)
     end
 
+    # approximate: true is no longer passed explicitly -- it's humane-ruby's
+    # own default as of v0.9.0. See docs/releases/2.7.0.md.
     def time_ago(time)
-      Humane::TimeFormatter.new(approximate: true).string(at: time, relative_to: Time.now)
+      Humane::TimeFormatter.time_ago(time, Time.now)
     end
   end
 
