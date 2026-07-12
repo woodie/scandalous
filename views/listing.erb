@@ -13,7 +13,7 @@
       <% @listing.each do |file| %>
         <li>
           <button type="button" class="delete" onclick="deleteFile('<%= file[:name] %>',
-          '<%= "Delete this scan from #{time_ago file[:time]}?" %>')">🗑</button>
+          '<%= "Delete this scan from #{time_ago file[:time]}?" %>')">🗑️</button>
           <a href="/download/<%= file[:name] %>">📄 <%= human_size file[:size] %></a>
           <span><%= time_ago file[:time] %></span>
         </li>
