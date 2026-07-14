@@ -9,12 +9,6 @@ class WebApp < Sinatra::Base
       Humane.human_size(size)
     end
 
-    # approximate: true is no longer passed explicitly -- it's humane-ruby's
-    # own default as of v0.9.0. Time.now is no longer passed explicitly
-    # either -- Humane.time_ago is a one-argument convenience over
-    # Humane.distance_in_time as of humane-ruby v0.9.3, supplying the real
-    # clock internally. See docs/releases/2.7.0.md and humane-ruby's own
-    # docs/COWORK.md v0.9.3 entry.
     def time_ago(time)
       Humane.time_ago(time)
     end
