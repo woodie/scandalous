@@ -7,9 +7,11 @@
     "test-js": "vitest run",
     "lint-rb": "bundle exec standardrb",
     "test-rb": "bundle exec rspec -fd spec",
-    "check": "npm run lint-js && vitest run --reporter=dot && npm run lint-rb && bundle exec rspec spec"
+    "lint-html": "html-validate --ext=erb views/",
+    "check": "npm run lint-js && vitest run --reporter=dot && npm run lint-rb && bundle exec rspec spec && npm run lint-html"
   },
   "devDependencies": {
+    "html-validate": "^11.5.6",
     "sinon": "^19.0.2",
     "standard": "^17.1.2",
     "vitest": "^2.1.9"
