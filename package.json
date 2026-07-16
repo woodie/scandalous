@@ -3,6 +3,7 @@
   "private": true,
   "description": "Lint/test task runner for scandalous (JS via npm scripts, Ruby via bundler)",
   "scripts": {
+    "test": "vitest run && bundle exec rspec -fd spec",
     "lint-js": "standard",
     "test-js": "vitest run",
     "lint-rb": "bundle exec standardrb",
