@@ -1,0 +1,6 @@
+[tools]
+node = "lts"
+ruby = "3.1.2"
+
+[settings.ruby]
+apply_patches = "./patches/ruby-3.1.2-darwin-socket.patch"
