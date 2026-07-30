@@ -39,6 +39,7 @@ class ScanFiles
 
   def self.detach(attachments)
     attachments.each do |attachment|
+      # Unlike lambada's processAttachments (saves any attachment type), only PDFs are kept here.
       if attachment.content_type.start_with?("application/pdf")
         filename = File.join(scan_folder, "#{Time.now.to_i}.pdf")
         File.open(filename, "w+b", 0o644) { |f| f.write attachment.decoded }

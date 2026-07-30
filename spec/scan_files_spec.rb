@@ -62,6 +62,28 @@ RSpec.describe ScanFiles do
         expect(subject).to eq([{name: name, time: File.mtime(path), size: 42}])
       end
     end
+
+    context "with multiple files" do
+      before do
+        File.write(File.join(ScanFiles.scan_folder, "1000000000.pdf"), "a")
+        File.write(File.join(ScanFiles.scan_folder, "2000000000.pdf"), "b")
+      end
+
+      it "sorts newest filename first" do
+        expect(subject.map { |f| f[:name] }).to eq(["2000000000.pdf", "1000000000.pdf"])
+      end
+    end
+
+    context "with a non-PDF file present" do
+      before do
+        File.write(File.join(ScanFiles.scan_folder, "1234567890.pdf"), "content")
+        File.write(File.join(ScanFiles.scan_folder, "notes.txt"), "ignore me")
+      end
+
+      it "ignores it, returning only the PDF" do
+        expect(subject.map { |f| f[:name] }).to eq(["1234567890.pdf"])
+      end
+    end
   end
 
   describe "#scans_json" do
@@ -93,7 +115,7 @@ RSpec.describe ScanFiles do
     before { File.write(pdf, "data") }
 
     context "when the file is recent" do
-      it "keeps it" do
+      it "keeps the PDF file" do
         ScanFiles.cleanup
         expect(File.exist?(pdf)).to be true
       end
@@ -105,7 +127,7 @@ RSpec.describe ScanFiles do
         File.utime(old, old, pdf)
       end
 
-      it "deletes it" do
+      it "deletes the PDF file" do
         ScanFiles.cleanup
         expect(File.exist?(pdf)).to be false
       end

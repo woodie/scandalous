@@ -73,6 +73,17 @@ RSpec.describe WebApp do
         end
       end
 
+      context "with files can be newer" do
+        before { File.utime(time, time, File.join(ScanFiles.scan_folder, file)) }
+
+        let(:time) { Time.now + 180 }
+
+        it "displays in 3 minutes" do
+          get "/"
+          expect(last_response.body).to have_tag("span", text: "in 3 minutes")
+        end
+      end
+
       it "wires the delete confirm dialog with the full message" do
         get "/"
         expect(last_response.body).to have_tag("button.delete",
@@ -81,10 +92,11 @@ RSpec.describe WebApp do
     end
 
     describe "download actual file" do
-      it "responds with 200" do
+      it "responds with 200 and an attachment header" do
         get "/download/#{file}"
         expect(last_response).to be_ok
         expect(last_response.status).to eq(200)
+        expect(last_response.headers["Content-Disposition"]).to include("attachment")
       end
     end
 
@@ -93,6 +105,12 @@ RSpec.describe WebApp do
         delete "/download/#{file}"
         expect(last_response.status).to eq(204)
         expect(File.exist?(File.join(ScanFiles.scan_folder, file))).to be false
+      end
+
+      it "leaves the file gone for a subsequent GET" do
+        delete "/download/#{file}"
+        get "/download/#{file}"
+        expect(last_response.status).to eq(404)
       end
     end
 
