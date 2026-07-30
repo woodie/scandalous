@@ -1,6 +1,5 @@
 require "spec_helper"
 require "mail"
-require "tmpdir"
 require "base64"
 require_relative "../lib/scan_files"
 
@@ -40,14 +39,9 @@ RSpec.describe ScanFiles do
     "--boundary--\r\n"
   end
 
-  around do |example|
-    Dir.mktmpdir do |dir|
-      original_scan_folder = ScanFiles.scan_folder
-      ScanFiles.scan_folder = dir
-      example.run
-      ScanFiles.scan_folder = original_scan_folder
-    end
-  end
+  # Tmpdir swap for ScanFiles.scan_folder is global now -- see
+  # spec/spec_helper.rb's config.around -- so every spec here (and in
+  # web_spec.rb) already gets an isolated folder, not just this file's own.
 
   describe "#listing" do
     subject { ScanFiles.listing }
