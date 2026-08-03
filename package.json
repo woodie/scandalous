@@ -3,11 +3,11 @@
   "private": true,
   "description": "Lint/test task runner for scandalous (JS via npm scripts, Ruby via bundler)",
   "scripts": {
-    "test": "vitest run && bundle exec rspec -fd spec",
+    "test": "vitest run && bundle exec rutidy -fv spec",
     "lint-js": "standard --fix",
     "test-js": "vitest run",
     "lint-rb": "bundle exec standardrb --fix",
-    "test-rb": "bundle exec rspec -fd spec",
+    "test-rb": "bundle exec rutidy -fv spec",
     "lint-html": "html-validate --ext=erb views/",
     "check": "standard && vitest run --reporter=dot && bundle exec standardrb && bundle exec rspec spec && npm run lint-html"
   },

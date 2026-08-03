@@ -72,9 +72,9 @@ bundle install       # Ruby gems (first time only)
 npm install          # JS devDependencies (first time only)
 
 npm run lint-js      # standard
-npm run test-js      # vitest run (documentation-style output)
+npm run test-js      # vitest run (Vitest's own tree output)
 npm run lint-rb      # bundle exec standardrb
-npm run test-rb      # bundle exec rspec -fd spec (documentation-style output)
+npm run test-rb      # bundle exec rutidy -fv spec (Vitest-tree output, matching test-js)
 
 npm run check        # all four, in order, stops at the first failure
 ```
@@ -82,9 +82,9 @@ npm run check        # all four, in order, stops at the first failure
 `npm run check` runs the same four checks split across `ci.yml`'s `ruby`
 and `javascript` jobs -- run it locally before pushing to catch what CI
 would catch. It uses `vitest run --reporter=dot` and `rspec spec` (no
-`-fd`) instead of `test-js`/`test-rb`'s documentation-style output, so
-running all four together stays compact -- reach for `test-js`/`test-rb`
-directly when you want the full describe/context/it breakdown.
+`rutidy`) instead of `test-js`/`test-rb`'s tree output, so running all
+four together stays compact -- reach for `test-js`/`test-rb` directly
+when you want the full describe/context/it breakdown.
 
 `node_modules` is gitignored (like `Gemfile.lock`) and contains
 platform-specific native binaries (Rollup/esbuild, via vitest). If you see

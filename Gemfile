@@ -19,4 +19,5 @@ group :test do
   gem "rack-test"
   gem "rspec"
   gem "rspec-html-matchers", "~> 0.10.0"
+  gem "rutidy", "~> 0.1"
 end
