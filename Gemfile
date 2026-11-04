@@ -1,7 +1,8 @@
 source "http://rubygems.org"
 
-ruby "3.1.2", patchlevel: "20"
+ruby "4.0.9"
 
+# gem "dav4rack"
 gem "mail"
 gem "sinatra"
 gem "puma", "~> 8.0"
