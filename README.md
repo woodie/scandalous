@@ -1,3 +1,8 @@
+```diff
+- This ecosystem moved to WebDAV which runs on Nginx. -
+- This project is now deprecated. Please use lambada. -
+```
+
 # Scandalous scan server
 
 [![Ruby](https://img.shields.io/badge/Ruby-4.0-red.svg)](https://www.ruby-lang.org/)
